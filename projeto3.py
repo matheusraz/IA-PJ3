@@ -2,6 +2,10 @@ try:
     arquivo = open('car.txt','r')
     carros = arquivo.readlines()
 
+    prioridade = input("Defina uma ordem de prioridade para os atributos:\n1 - Preço\n2 - Custo da manutenção\n3 - Numero Portas\n4 - Numero de Pessoas\n5 - Capacidade Mala\n6 - Nível de Segurança\n")
+    prioridade = prioridade.split(',')
+    prioridade = [int(i) for i in prioridade]
+
     preco = int(input("Qual a media de preço do carro que você procura? Escolha entre as opções abaixo:\n1-baixo\n2-medio\n3-alto\n4-muito alto\n"))
     while preco < 1 or preco > 4:
         preco = int(input("Qual a media de preço do carro que você procura? Escolha entre as opções abaixo:\n1-baixo\n2-medio\n3-alto\n4-muito alto\n"))
@@ -89,5 +93,7 @@ try:
         carros.pop(j)
     arquivo.close()
     print(carros)
+    print(prioridade)
+    
 except IOError:
     print ("ERRO em arquivo -")
