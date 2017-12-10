@@ -1,3 +1,31 @@
+def converte(atributo,dado):
+    if atributo == 1 or atributo == 2:
+        if dado == 1:
+            dado = "baixo"
+        elif dado == 2:
+            dado = "medio"
+        elif dado == 3:
+            dado = "alto"
+        else:
+            dado = "muito alto"
+    elif atributo == 3 or atributo == 4:
+        dado = str(dado)
+    elif atributo == 5:
+        if dado == 1:
+           dado = "pequena"
+        elif dado == 2:
+            dado = "media"
+        else:
+            dado = "grande"
+    else:
+        if dado == 1:
+           dado = "pequena"
+        elif dado == 2:
+            dado = "media"
+        else:
+            dado = "alta"
+    return dado
+
 try:
     arquivo = open('car.txt','r')
     carros = arquivo.readlines()
@@ -8,7 +36,7 @@ try:
 
     preco = int(input("Qual a media de preço do carro que você procura? Escolha entre as opções abaixo:\n1-baixo\n2-medio\n3-alto\n4-muito alto\n"))
     while preco < 1 or preco > 4:
-        preco = int(input("Qual a media de preço do carro que você procura? Escolha entre as opções abaixo:\n1-baixo\n2-medio\n3-alto\n4-muito alto\n"))
+        preco = int(input("Qual a media de preço do carro que você procura? Escolha entre as opções abaixo:\n1-baixo\n2-medio\n3-alto\n4-muito alto\n")) 
 
     manutencao = int(input("Qual a media de preço de manuntenção que você procura? Escolha entre as opções abaixo:\n1-baixo\n2-medio\n3-alto\n4-muito alto\n"))
     while manutencao < 1 or manutencao > 4:
@@ -72,17 +100,17 @@ try:
 
         ################ Eliminacao dos carros que nao interessam ##########################
         elimina = False
-        if carros[i][0] > preco:
+        if carros[i][0] < preco-1 or carros[i][0] > preco+1:
             elimina = True
-        elif carros[i][1] > manutencao:
+        elif carros[i][1] < manutencao-1 or carros[i][1] > manutencao+1:
             elimina = True
-        elif carros[i][2] < portas:
+        elif carros[i][2] < portas-1 or carros[i][2] > portas+1:
             elimina = True
-        elif carros[i][3] < pessoas:
+        elif carros[i][3] < pessoas-1 or carros[i][3] > pessoas+1:
             elimina = True
-        elif carros[i][4] < mala:
+        elif carros[i][4] < mala-1 or carros[i][4] > mala+1:
             elimina = True
-        elif carros[i][5] < seguranca:
+        elif carros[i][5] < seguranca-1 or carros[i][5] > seguranca+1:
             elimina = True
 
         if elimina == True:
@@ -92,6 +120,21 @@ try:
     for j in indesejados:
         carros.pop(j)
     arquivo.close()
+
+    while len(carros) > 5:
+        opcao1 = carros[0]
+        opcao2 = carros[len(carros)-1]
+        print("Escolha um desses carros:")
+        print("1-Preço: %s; Manutenção: %s; Portas: %s; Pessoas: %s; Mala: %s; Segurança: %s"
+              %(converte(1,opcao1[0]),converte(2,opcao1[1]),converte(3,opcao1[2]),converte(4,opcao1[3]),converte(5,opcao1[4]),converte(6,opcao1[5])))
+        print("2-Preço: %s; Manutenção: %s; Portas: %s; Pessoas: %s; Mala: %s; Segurança: %s"
+              %(converte(1,opcao2[0]),converte(2,opcao2[1]),converte(3,opcao2[2]),converte(4,opcao2[3]),converte(5,opcao2[4]),converte(6,opcao2[5])))
+        escolha = int(input())
+        if escolha == 1:
+            carros = carros[0:len(carros)//2]
+        else:
+            carros = carros[len(carros)//2:]              
+            
     print(carros)
     print(prioridade)
     
