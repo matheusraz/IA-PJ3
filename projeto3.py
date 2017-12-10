@@ -36,7 +36,7 @@ try:
 
     preco = int(input("Qual a media de preço do carro que você procura? Escolha entre as opções abaixo:\n1-baixo\n2-medio\n3-alto\n4-muito alto\n"))
     while preco < 1 or preco > 4:
-        preco = int(input("Qual a media de preço do carro que você procura? Escolha entre as opções abaixo:\n1-baixo\n2-medio\n3-alto\n4-muito alto\n")) 
+        preco = int(input("Qual a media de preço do carro que você procura? Escolha entre as opções abaixo:\n1-baixo\n2-medio\n3-alto\n4-muito alto\n"))
 
     manutencao = int(input("Qual a media de preço de manuntenção que você procura? Escolha entre as opções abaixo:\n1-baixo\n2-medio\n3-alto\n4-muito alto\n"))
     while manutencao < 1 or manutencao > 4:
@@ -133,10 +133,13 @@ try:
         if escolha == 1:
             carros = carros[0:len(carros)//2]
         else:
-            carros = carros[len(carros)//2:]              
-            
-    print(carros)
-    print(prioridade)
-    
+            carros = carros[len(carros)//2:]
+
+    #print(carros)
+    print("\n\nTOP de 1 a 5 dos carros ideais para você!!\n")
+    for i in range(len(carros)):
+        print("Carro %d:\n Preço: %s\n Custo de Manutenção: %s\n Numero de Portas: %s\n Capacidade: %s pessoas\n Mala: %s\n Segurança: %s\n"%(i+1,converte(1,carros[i][0]),converte(2,carros[i][1]),converte(3,carros[i][2]),converte(4,carros[i][3]),converte(5,carros[i][4]),converte(6,carros[i][5])))
+    #print(prioridade)
+
 except IOError:
     print ("ERRO em arquivo -")
